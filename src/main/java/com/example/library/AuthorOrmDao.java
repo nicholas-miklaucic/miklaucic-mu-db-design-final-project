@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*")
+@RequestMapping()
 public class AuthorOrmDao {
     @Autowired
     BookRepository books;
@@ -15,22 +16,22 @@ public class AuthorOrmDao {
     @Autowired
     AuthorRepository repo;
 
-    @GetMapping("/authors")
+    @GetMapping("/api/authors")
     public List<Author> findAllAuthors() {
         return repo.findAll();
     }
 
-    @PostMapping("/authors")
+    @PostMapping("/api/authors")
     public Author createAuthor(@RequestBody Author author) {
         return repo.save(author);
     }
 
-    @GetMapping("/authors/{id}")
+    @GetMapping("/api/authors/{id}")
     public Author findAuthorById(@PathVariable("id") String id) {
         return repo.findById(new ObjectId(id)).orElseThrow();
     }
 
-    @PutMapping("/authors/{id}")
+    @PutMapping("/api/authors/{id}")
     public Author updateAuthor(@PathVariable("id") String id, @RequestBody Author authorUpdates) {
         Author author = repo.findById(new ObjectId(id)).orElseThrow();
         author.setFirstName(authorUpdates.getFirstName());
@@ -39,7 +40,7 @@ public class AuthorOrmDao {
         return repo.save(author);
     }
 
-    @DeleteMapping("/authors/{id}")
+    @DeleteMapping("/api/authors/{id}")
     public void deleteAuthor(@PathVariable("id") String id) {
         Author author = repo.findById(new ObjectId(id)).orElseThrow();
         // cascade delete through books

@@ -15,22 +15,22 @@ public class UserOrmDao {
     @Autowired
     UserRepository repo;
 
-    @GetMapping("/users")
+    @GetMapping("/api/users")
     public List<User> findAllUsers() {
         return repo.findAll();
     }
 
-    @PostMapping("/users")
+    @PostMapping("/api/users")
     public User createUser(@RequestBody User user) {
         return repo.save(user);
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/api/users/{id}")
     public User findUserById(@PathVariable("id") String id) {
         return repo.findById(new ObjectId(id)).orElseThrow();
     }
 
-    @PutMapping("/users/{id}")
+    @PutMapping("/api/users/{id}")
     public User updateUser(@PathVariable("id") String id, @RequestBody User userUpdates) {
         User user = repo.findById(new ObjectId(id)).orElseThrow();
         user.setFirstName(userUpdates.getFirstName());
@@ -42,7 +42,7 @@ public class UserOrmDao {
         return repo.save(user);
     }
 
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/api/users/{id}")
     public void deleteUser(@PathVariable("id") String id) {
         User user = repo.findById(new ObjectId(id)).orElseThrow();
         // cascade delete through reservations

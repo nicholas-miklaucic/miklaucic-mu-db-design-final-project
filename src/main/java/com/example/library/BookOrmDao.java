@@ -18,22 +18,22 @@ public class BookOrmDao {
     @Autowired
     BookRepository repo;
 
-    @GetMapping("/books")
+    @GetMapping("/api/books")
     public List<Book> findAllBooks() {
         return repo.findAll();
     }
 
-    @PostMapping("/books")
+    @PostMapping("/api/books")
     public Book createBook(@RequestBody Book book) {
         return repo.save(book);
     }
 
-    @GetMapping("/books/{id}")
+    @GetMapping("/api/books/{id}")
     public Book findBookById(@PathVariable("id") String id) {
         return repo.findById(new ObjectId(id)).orElseThrow();
     }
 
-    @PutMapping("/books/{id}")
+    @PutMapping("/api/books/{id}")
     public Book updateBook(@PathVariable("id") String id, @RequestBody Book bookUpdates) {
         Book book = repo.findById(new ObjectId(id)).orElseThrow();
         book.setTitle(bookUpdates.getTitle());
@@ -42,7 +42,7 @@ public class BookOrmDao {
         return repo.save(book);
     }
 
-    @DeleteMapping("/books/{id}")
+    @DeleteMapping("/api/books/{id}")
     public void deleteBook(@PathVariable("id") String id) {
         Book book = repo.findById(new ObjectId(id)).orElseThrow();
         // cascade delete through authors
