@@ -1,7 +1,6 @@
 package com.example.library;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -12,7 +11,7 @@ import java.util.List;
 public class Author {
 
     @Id
-    public ObjectId id;
+    public String id;
 
     public String firstName;
     public String lastName;

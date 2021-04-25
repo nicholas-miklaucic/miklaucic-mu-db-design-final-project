@@ -1,14 +1,14 @@
 package com.example.library;
 
 import java.util.Date;
-import org.bson.types.ObjectId;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "users")
 public class User {
     @Id
-    public ObjectId id;
+    public String id;
 
     public String firstName;
     public String lastName;

@@ -47,6 +47,8 @@ public class LibraryApplication implements CommandLineRunner {
         books.deleteAll();
         authors.deleteAll();
         genres.deleteAll();
+        users.deleteAll();
+        reservations.deleteAll();
 
         Genre fantasy = new Genre("FANTASY");
         Genre nonfiction = new Genre("NONFICTION");
