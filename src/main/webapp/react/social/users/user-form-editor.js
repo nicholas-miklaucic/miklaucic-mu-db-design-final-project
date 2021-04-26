@@ -26,8 +26,6 @@ const UserFormEditor = () => {
     return (
         <div>
             <h2>User Editor</h2>
-            <label>Id</label>
-            <input value={user.id}/><br/>
             <label>First Name</label>
             <input
                 onChange={(e) =>
@@ -52,6 +50,18 @@ const UserFormEditor = () => {
                     setUser(user =>
                         ({...user, password: e.target.value}))}
                 value={user.password}/><br/>
+            <label>Email</label>
+            <input
+                onChange={(e) =>
+                    setUser(user =>
+                        ({...user, email: e.target.value}))}
+                value={user.email}/><br/>
+            <label>DOB</label>
+                        <input
+                            onChange={(e) =>
+                                setUser(user =>
+                                    ({...user, dob: e.target.value}))}
+                            value={user.dob}/><br/>
             <button className="btn btn-warning"
                 onClick={() => {
                 history.goBack()}}>

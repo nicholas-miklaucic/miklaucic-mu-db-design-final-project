@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface ReservationRepository extends MongoRepository<Reservation, ObjectId> {
     Optional<Reservation> findById(ObjectId id);
+    List<Reservation> findAll();
     List<Reservation> findByBook(Book book);
     List<Reservation> findByUser(User user);
 }

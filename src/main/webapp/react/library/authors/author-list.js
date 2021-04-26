@@ -15,7 +15,7 @@ const AuthorList = () => {
         <div>
             <h2>Author List</h2>
             <button className="btn btn-primary"
-              onClick = {() => history.push("/authors/create")}>
+              onClick = {() => history.push("/authors/new")}>
                 Add Author
             </button>
             <ul>

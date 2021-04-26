@@ -15,7 +15,7 @@ const BookList = () => {
         <div>
             <h2>Book List</h2>
             <button className="btn btn-primary"
-              onClick = {() => history.push("/books/create")}>
+              onClick = {() => history.push("/books/new")}>
                 Add Book
             </button>
             <ul>
@@ -24,7 +24,7 @@ const BookList = () => {
                   <li key={book.id}>
                             <Link to={`/books/${book.id}`}>
                       {book.title},
-                      {book.genre}
+                      {book.genreType.id}
                             </Link>
                   </li>)
             }

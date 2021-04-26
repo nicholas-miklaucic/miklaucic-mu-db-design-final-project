@@ -26,8 +26,6 @@ const AuthorFormEditor = () => {
     return (
         <div>
             <h2>Author Editor</h2>
-            <label>Id</label>
-            <input value={author.id}/><br/>
             <label>First Name</label>
             <input
                 onChange={(e) =>
@@ -58,6 +56,7 @@ const AuthorFormEditor = () => {
                 onClick={() => createAuthor(author)}>
                 Create
             </button>
+
         </div>
     )
 }

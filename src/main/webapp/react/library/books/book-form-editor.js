@@ -26,23 +26,18 @@ const BookFormEditor = () => {
     return (
         <div>
             <h2>Book Editor</h2>
-            <label>Id</label>
-            <input value={book.id}/><br/>
             <label>Title</label>
             <input
                 onChange={(e) =>
                     setBook(book =>
                         ({...book, title: e.target.value}))}
                 value={book.title}/><br/>
-            <label>Genre</label>
-
-            <select onChange={(e) =>
-                        setBook(book =>
-                            ({...book, genre: e.target.value}))}>
-                <option value="fantasy">Fantasy</option>
-                <option value="nonfiction">Non-fiction</option>
-                <option value="rom-com">Rom-com</option>
-            </select>
+            <label>Last Name</label>
+            <input
+                onChange={(e) =>
+                    setBook(book =>
+                        ({...book, genreType: e.target.value}))}
+                value={book.genreType}/><br/>
 
             <button className="btn btn-warning"
                 onClick={() => {
@@ -61,6 +56,7 @@ const BookFormEditor = () => {
                 onClick={() => createBook(book)}>
                 Create
             </button>
+
         </div>
     )
 }

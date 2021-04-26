@@ -27,6 +27,13 @@ public class ReservationOrmDao {
         return repo.findById(new ObjectId(id)).orElseThrow();
     }
 
+    @GetMapping("/api/reservations/{id}")
+    public User findUser(@PathVariable("id") String id) {
+        Reservation reservation = repo.findById(new ObjectId(id)).orElseThrow();
+        return reservation.getUser();
+    }
+
+
     @PutMapping("/api/reservations/{id}")
     public Reservation updateReservation(@PathVariable("id") String id, @RequestBody Reservation reservationUpdates) {
         Reservation reservation = repo.findById(new ObjectId(id)).orElseThrow();
