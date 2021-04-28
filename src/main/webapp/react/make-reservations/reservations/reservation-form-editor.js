@@ -1,6 +1,7 @@
 import reservationService from "./reservation-service"
 import bookService from "../../library/books/book-service"
 import userService from "../../social/users/user-service"
+const {Link} = window.ReactRouterDOM;
 
 const {useState, useEffect} = React;
 const {useParams, useHistory} = window.ReactRouterDOM;
@@ -26,6 +27,18 @@ const ReservationFormEditor = () => {
         reservationService.updateReservation(id, newReservation)
             .then(() => history.goBack())
 
+  let userLink;
+  let bookLink;
+    if (typeof(reservation.user) == "undefined") {
+        userLink = ``;
+    } else {
+        userLink = `/users/${reservation.user.id}`;
+    }
+    if (typeof(reservation.book) == "undefined") {
+            bookLink = ``;
+    } else {
+            bookLink = `/books/${reservation.book.id}`;
+    }
     return (
         <div>
             <h2>Reservation Editor</h2>
@@ -65,6 +78,17 @@ const ReservationFormEditor = () => {
                     onClick={() => createReservation(reservation)}>
                 Create
             </button>
+            <li className="list-group-item">
+                <Link to={userLink}>
+                      User
+                </Link>
+            </li>
+            <li className="list-group-item">
+                <Link to={bookLink}>
+                      Book
+                </Link>
+            </li>
+
 
         </div>
     )
