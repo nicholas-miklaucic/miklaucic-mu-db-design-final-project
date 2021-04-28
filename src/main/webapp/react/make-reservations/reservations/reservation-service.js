@@ -7,6 +7,9 @@ export const findAllReservations = () => fetch(RESERVATIONS_URL).then(response =
 
 export const findReservationById = (id) => fetch(`${RESERVATIONS_URL}/${id}`).then(response => response.json())
 
+export const findAllReservationsByUser = (id) => fetch(`${RESERVATIONS_URL}/from-user/${id}`).then(response => response.json());
+export const findAllReservationsByBook = (id) => fetch(`${RESERVATIONS_URL}/from-book/${id}`).then(response => response.json());
+
 
 export const deleteReservation = (id) => fetch(`${RESERVATIONS_URL}/${id}`, { method: "DELETE" })
 
@@ -39,6 +42,8 @@ export const updateReservation = (id, reservation) => fetch(`${RESERVATIONS_URL}
 export default {
   findAllReservations,
   findReservationById,
+    findAllReservationsByBook,
+    findAllReservationsByUser,
   deleteReservation,
   createReservation,
   updateReservation,

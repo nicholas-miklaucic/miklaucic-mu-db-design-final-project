@@ -1,6 +1,6 @@
 import userService from "./user-service"
 const {useState, useEffect} = React;
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 const UserFormEditor = () => {
     const {id} = useParams()
     const history = useHistory()
@@ -22,6 +22,8 @@ const UserFormEditor = () => {
     const updateUser = (id, newUser) =>
         userService.updateUser(id, newUser)
             .then(() => history.goBack())
+    console.log("ID");
+    console.log(id);
 
     return (
         <div>
@@ -79,7 +81,10 @@ const UserFormEditor = () => {
                 onClick={() => createUser(user)}>
                 Create
             </button>
-
+            <Link className="btn"
+                  to={"/reservations/from-user/" + id}>
+                Reservations
+            </Link>
         </div>
     )
 }

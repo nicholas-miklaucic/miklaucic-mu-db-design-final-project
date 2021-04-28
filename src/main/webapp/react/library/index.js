@@ -6,6 +6,8 @@ import UserList from "../social/users/user-list";
 import UserFormEditor from "../social/users/user-form-editor";
 import ReservationList from "../make-reservations/reservations/reservation-list";
 import ReservationFormEditor from "../make-reservations/reservations/reservation-form-editor";
+import ReservationListUser from "../make-reservations/reservations/reservation-list-user";
+import ReservationListBook from "../make-reservations/reservations/reservation-list-book";
 
 const {HashRouter, Link, Route} = window.ReactRouterDOM;
 
@@ -37,6 +39,12 @@ const App = () => {
                 </Route>
                 <Route path="/reservations/:id" exact={true}>
                     <ReservationFormEditor/>
+                </Route>
+                <Route path="/reservations/from-user/:userId" exact={true}>
+                    <ReservationListUser/>
+                </Route>
+                <Route path="/reservations/from-book/:bookId" exact={true}>
+                    <ReservationListBook/>
                 </Route>
             </HashRouter>
         </div>

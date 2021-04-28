@@ -1,6 +1,6 @@
 import bookService from "./book-service"
 const {useState, useEffect} = React;
-const {useParams, useHistory} = window.ReactRouterDOM;
+const {Link, useParams, useHistory} = window.ReactRouterDOM;
 const BookFormEditor = () => {
     const {id} = useParams()
     const history = useHistory()
@@ -65,7 +65,10 @@ const BookFormEditor = () => {
                 onClick={() => createBook(book)}>
                 Create
             </button>
-
+            <Link className="btn"
+                  to={"/reservations/from-book/" + id}>
+                Reservations
+            </Link>
         </div>
     )
 }
