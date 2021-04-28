@@ -84,4 +84,4 @@ const UserFormEditor = () => {
     )
 }
 
-export default UserFormEditor
+export default UserFormEditor;

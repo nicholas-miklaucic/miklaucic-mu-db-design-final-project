@@ -12,6 +12,12 @@ public class ReservationOrmDao {
     @Autowired
     ReservationRepository repo;
 
+    @Autowired
+    BookRepository books;
+
+    @Autowired
+    UserRepository users;
+
     @GetMapping("/api/reservations")
     public List<Reservation> findAllReservations() {
         return repo.findAll();
@@ -27,13 +33,6 @@ public class ReservationOrmDao {
         return repo.findById(new ObjectId(id)).orElseThrow();
     }
 
-    @GetMapping("/api/reservations/{id}")
-    public User findUser(@PathVariable("id") String id) {
-        Reservation reservation = repo.findById(new ObjectId(id)).orElseThrow();
-        return reservation.getUser();
-    }
-
-
     @PutMapping("/api/reservations/{id}")
     public Reservation updateReservation(@PathVariable("id") String id, @RequestBody Reservation reservationUpdates) {
         Reservation reservation = repo.findById(new ObjectId(id)).orElseThrow();
@@ -47,5 +46,15 @@ public class ReservationOrmDao {
     public void deleteReservation(@PathVariable("id") String id) {
         // this isn't stored in other dbs so no cascades required
         repo.deleteById(new ObjectId(id));
+    }
+
+    @GetMapping("/api/reservations/from-user/{id}")
+    public List<Reservation> findReservationsByUser(@PathVariable("id") String id) {
+        return repo.findByUser(users.findById(id).orElseThrow());
+    }
+
+    @GetMapping("/api/reservations/from-book/{id}")
+    public List<Reservation> findReservationsByBook(@PathVariable("id") String id) {
+        return repo.findByBook(books.findById(id).orElseThrow());
     }
 }

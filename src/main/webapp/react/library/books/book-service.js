@@ -27,10 +27,20 @@ export const updateBook = (id, book) => fetch(`${BOOKS_URL}/${id}`, {
                                             })
                                             .then(response => response.json())
 
+export const genres = fetch(`http://localhost:8080/api/genres`).then(response => response.json());
+
+let allGenres = [];
+genres.then((allGs) => allGs.map(genre => {
+    console.log(genre);
+    allGenres.push(genre);
+}));
+
+
 export default {
-  findAllBooks,
-  findBookById,
-  deleteBook,
-  createBook,
-  updateBook
+    findAllBooks,
+    findBookById,
+    deleteBook,
+    createBook,
+    updateBook,
+    allGenres
 }

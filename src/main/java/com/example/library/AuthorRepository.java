@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AuthorRepository extends MongoRepository<Author, ObjectId> {
-    Optional<Author> findById(ObjectId id);
+    Optional<Author> findById(String id);
 
     List<Author> findAll();
 }

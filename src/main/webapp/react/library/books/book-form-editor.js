@@ -23,6 +23,13 @@ const BookFormEditor = () => {
         bookService.updateBook(id, newBook)
             .then(() => history.goBack())
 
+    let genre;
+    if (typeof(book.genreType) == "undefined") {
+        genre = "Undefined";
+    } else {
+        genre = book.genreType.id;
+    }
+
     return (
         <div>
             <h2>Book Editor</h2>
@@ -32,12 +39,14 @@ const BookFormEditor = () => {
                     setBook(book =>
                         ({...book, title: e.target.value}))}
                 value={book.title}/><br/>
-            <label>Last Name</label>
-            <input
-                onChange={(e) =>
-                    setBook(book =>
-                        ({...book, genreType: e.target.value}))}
-                value={book.genreType}/><br/>
+            <label>Genre</label>
+            <select value={genre} onChange={(e) => {
+                setBook(book => ({...book, genreType: e.target.value}));
+            }}>
+                {
+                    bookService.allGenres.map(genre => <option value={genre.id} key={genre}>{genre.id}</option>)
+                }
+            </select>
 
             <button className="btn btn-warning"
                 onClick={() => {

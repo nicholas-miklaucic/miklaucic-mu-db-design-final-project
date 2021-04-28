@@ -1,4 +1,7 @@
 import reservationService from "./reservation-service"
+import bookService from "../../library/books/book-service"
+import userService from "../../social/users/user-service"
+
 const {useState, useEffect} = React;
 const {useParams, useHistory} = window.ReactRouterDOM;
 const ReservationFormEditor = () => {
@@ -22,9 +25,19 @@ const ReservationFormEditor = () => {
     const updateReservation = (id, newReservation) =>
         reservationService.updateReservation(id, newReservation)
             .then(() => history.goBack())
-    const findUser = (id) =>
-        reservationService.findUser(id)
-            .then(() => history.goBack())
+
+    let allBooks = [];
+    bookService.findAllBooks().then((allBs) => allBs.map(book => {
+        console.log(book);
+        allBooks.push(book);
+    }));
+
+    let allUsers = [];
+    userService.findAllUsers().then((allUs) => allUs.map(user => {
+        console.log(user);
+        allUsers.push(user);
+    }));
+
 
     return (
         <div>
@@ -37,6 +50,11 @@ const ReservationFormEditor = () => {
                         ({...reservation, user: e.target.value}))}
                 value={reservation.user}/><br/>
             <label>Book</label>
+            <select value={reservation.book} onChange={e => setReservation(res => ({...res, book: e.target.value}))}>
+                {
+                    allBooks.map(book => <option value={book.title} key={book}>book.title</option>)
+                }
+            </select>
             <input
                             onChange={(e) =>
                                 setReservation(reservation =>

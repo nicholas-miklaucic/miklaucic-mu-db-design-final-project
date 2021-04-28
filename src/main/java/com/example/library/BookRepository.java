@@ -8,7 +8,7 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 public interface BookRepository extends MongoRepository<Book, ObjectId> {
 
-    Optional<Book> findById(ObjectId id);
+    Optional<Book> findById(String id);
 
     List<Book> findAll();
 }
