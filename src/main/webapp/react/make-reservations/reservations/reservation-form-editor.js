@@ -26,51 +26,48 @@ const ReservationFormEditor = () => {
         reservationService.updateReservation(id, newReservation)
             .then(() => history.goBack())
 
-    if (typeof(reservation.user) == "undefined") {
-        return "";
-    } else {
-        console.log(reservation);
-        return (
-            <div>
-                <h2>Reservation Editor</h2>
+    return (
+        <div>
+            <h2>Reservation Editor</h2>
 
-                <label>User</label>
-                <select value={JSON.stringify(reservation.user)}
-                        onChange={e => setReservation(res => ({...res, user: JSON.parse(e.target.value)}))}>
-                    {
-                        userService.allUsers.map(user => <option value={JSON.stringify(user)} key={user.id}>{user.firstName}</option>)
-                    }
-                </select>
-                <label>Book</label>
-                <select value={JSON.stringify(reservation.book)}
-                        onChange={e => setReservation(res => ({...res, book: JSON.parse(e.target.value)}))}>
-                    {
-                        bookService.allBooks.map(book => <option value={JSON.stringify(book)} key={book.id}>{book.title}</option>)
-                    }
-                </select>
+            <label>User</label>
+            <select value={JSON.stringify(reservation.user)}
+                    onChange={e => setReservation(res => ({...res, user: JSON.parse(e.target.value)}))}>
+                {
+                    userService.allUsers.map(user => <option value={JSON.stringify(user)}
+                                                             key={user.id}>{user.firstName}</option>)
+                }
+            </select>
+            <label>Book</label>
+            <select value={JSON.stringify(reservation.book)}
+                    onChange={e => setReservation(res => ({...res, book: JSON.parse(e.target.value)}))}>
+                {
+                    bookService.allBooks.map(book => <option value={JSON.stringify(book)}
+                                                             key={book.id}>{book.title}</option>)
+                }
+            </select>
 
-                <button className="btn btn-warning"
-                        onClick={() => {
-                            history.goBack()
-                        }}>
-                    Cancel
-                </button>
-                <button className="btn btn-danger"
-                        onClick={() => deleteReservation(reservation.id)}>
-                    Delete
-                </button>
-                <button className="btn btn-primary"
-                        onClick={() => updateReservation(reservation.id, reservation)}>
-                    Save
-                </button>
-                <button className="btn btn-success"
-                        onClick={() => createReservation(reservation)}>
-                    Create
-                </button>
+            <button className="btn btn-warning"
+                    onClick={() => {
+                        history.goBack()
+                    }}>
+                Cancel
+            </button>
+            <button className="btn btn-danger"
+                    onClick={() => deleteReservation(reservation.id)}>
+                Delete
+            </button>
+            <button className="btn btn-primary"
+                    onClick={() => updateReservation(reservation.id, reservation)}>
+                Save
+            </button>
+            <button className="btn btn-success"
+                    onClick={() => createReservation(reservation)}>
+                Create
+            </button>
 
-            </div>
-        )
-    }
+        </div>
+    )
 }
 
 export default ReservationFormEditor
