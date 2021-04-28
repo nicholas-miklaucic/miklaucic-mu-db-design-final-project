@@ -4,6 +4,11 @@ const USERS_URL = "http://localhost:8080/api/users"
 // TODO: retrieve all users from the server
 export const findAllUsers = () => fetch(USERS_URL).then(response => response.json())
 
+let allUsers = [];
+findAllUsers().then((allUs) => allUs.map(user => {
+    allUsers.push(user);
+}));
+
 // TODO: retrieve a single user by their ID
 export const findUserById = (id) => fetch(`${USERS_URL}/${id}`).then(response => response.json())
 
@@ -34,5 +39,6 @@ export default {
   findUserById,
   deleteUser,
   createUser,
-  updateUser
+  updateUser,
+    allUsers
 }

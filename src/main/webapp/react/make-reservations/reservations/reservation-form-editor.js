@@ -9,9 +9,9 @@ const ReservationFormEditor = () => {
     const history = useHistory()
     const [reservation, setReservation] = useState({})
     useEffect(() => {
-      if (id !== "new") {
-        findReservationById(id)
-      }
+        if (id !== "new") {
+            findReservationById(id)
+        }
     }, []);
 
     const findReservationById = (id) =>
@@ -26,61 +26,51 @@ const ReservationFormEditor = () => {
         reservationService.updateReservation(id, newReservation)
             .then(() => history.goBack())
 
-    let allBooks = [];
-    bookService.findAllBooks().then((allBs) => allBs.map(book => {
-        console.log(book);
-        allBooks.push(book);
-    }));
+    if (typeof(reservation.user) == "undefined") {
+        return "";
+    } else {
+        console.log(reservation);
+        return (
+            <div>
+                <h2>Reservation Editor</h2>
 
-    let allUsers = [];
-    userService.findAllUsers().then((allUs) => allUs.map(user => {
-        console.log(user);
-        allUsers.push(user);
-    }));
+                <label>User</label>
+                <select value={reservation.user.id}
+                        onChange={e => setReservation(res => ({...res, user: e.target.value}))}>
+                    {
+                        userService.allUsers.map(user => <option value={user.id} key={user.id}>{user.firstName}</option>)
+                    }
+                </select>
+                <label>Book</label>
+                <select value={reservation.book.id}
+                        onChange={e => setReservation(res => ({...res, book: e.target.value}))}>
+                    {
+                        bookService.allBooks.map(book => <option value={book.id} key={book.id}>{book.title}</option>)
+                    }
+                </select>
 
+                <button className="btn btn-warning"
+                        onClick={() => {
+                            history.goBack()
+                        }}>
+                    Cancel
+                </button>
+                <button className="btn btn-danger"
+                        onClick={() => deleteReservation(reservation.id)}>
+                    Delete
+                </button>
+                <button className="btn btn-primary"
+                        onClick={() => updateReservation(reservation.id, reservation)}>
+                    Save
+                </button>
+                <button className="btn btn-success"
+                        onClick={() => createReservation(reservation)}>
+                    Create
+                </button>
 
-    return (
-        <div>
-            <h2>Reservation Editor</h2>
-
-            <label>User</label>
-            <input
-                onChange={(e) =>
-                    setReservation(reservation =>
-                        ({...reservation, user: e.target.value}))}
-                value={reservation.user}/><br/>
-            <label>Book</label>
-            <select value={reservation.book} onChange={e => setReservation(res => ({...res, book: e.target.value}))}>
-                {
-                    allBooks.map(book => <option value={book.title} key={book}>book.title</option>)
-                }
-            </select>
-            <input
-                            onChange={(e) =>
-                                setReservation(reservation =>
-                                    ({...reservation, book: e.target.value}))}
-                            value={reservation.book}/><br/>
-
-            <button className="btn btn-warning"
-                onClick={() => {
-                history.goBack()}}>
-                Cancel
-            </button>
-            <button className="btn btn-danger"
-                onClick={() => deleteReservation(reservation.id)}>
-                Delete
-            </button>
-            <button className="btn btn-primary"
-                onClick={() => updateReservation(reservation.id, reservation)}>
-                Save
-            </button>
-            <button className="btn btn-success"
-                onClick={() => createReservation(reservation)}>
-                Create
-            </button>
-
-        </div>
-    )
+            </div>
+        )
+    }
 }
 
 export default ReservationFormEditor
