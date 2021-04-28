@@ -21,9 +21,17 @@ export const createReservation = (reservation) => fetch(RESERVATIONS_URL, {
 
 export const findUser = (id) => fetch(`${RESERVATIONS_URL}/${id}`).then(response => response.json())
 
+
+function stringify(res) {
+    let newRes = JSON.parse(JSON.stringify(res));
+    if (typeof(newRes.book) !== "undefined") {
+        newRes.book.genreType = newRes.book.genreType.id;
+    }
+    return JSON.stringify(newRes);
+}
 export const updateReservation = (id, reservation) => fetch(`${RESERVATIONS_URL}/${id}`, {
                                                 method: 'PUT',
-                                                body: JSON.stringify(reservation),
+                                                body: stringify(reservation),
                                                 headers: {'content-type': 'application/json'}
                                             })
                                             .then(response => response.json())

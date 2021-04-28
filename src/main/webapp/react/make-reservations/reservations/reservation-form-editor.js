@@ -35,17 +35,17 @@ const ReservationFormEditor = () => {
                 <h2>Reservation Editor</h2>
 
                 <label>User</label>
-                <select value={reservation.user.id}
-                        onChange={e => setReservation(res => ({...res, user: e.target.value}))}>
+                <select value={JSON.stringify(reservation.user)}
+                        onChange={e => setReservation(res => ({...res, user: JSON.parse(e.target.value)}))}>
                     {
-                        userService.allUsers.map(user => <option value={user.id} key={user.id}>{user.firstName}</option>)
+                        userService.allUsers.map(user => <option value={JSON.stringify(user)} key={user.id}>{user.firstName}</option>)
                     }
                 </select>
                 <label>Book</label>
-                <select value={reservation.book.id}
-                        onChange={e => setReservation(res => ({...res, book: e.target.value}))}>
+                <select value={JSON.stringify(reservation.book)}
+                        onChange={e => setReservation(res => ({...res, book: JSON.parse(e.target.value)}))}>
                     {
-                        bookService.allBooks.map(book => <option value={book.id} key={book.id}>{book.title}</option>)
+                        bookService.allBooks.map(book => <option value={JSON.stringify(book)} key={book.id}>{book.title}</option>)
                     }
                 </select>
 
